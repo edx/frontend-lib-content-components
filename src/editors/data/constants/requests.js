@@ -10,6 +10,7 @@ export const RequestStates = StrictDict({
 export const RequestKeys = StrictDict({
   fetchBlock: 'fetchBlock',
   fetchUnit: 'fetchUnit',
+  fetchStudioView: 'fetchStudioView',
   saveBlock: 'saveBlock',
   fetchImages: 'fetchImages',
   uploadImage: 'uploadImage',

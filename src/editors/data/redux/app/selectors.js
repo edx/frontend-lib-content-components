@@ -14,6 +14,7 @@ export const simpleSelectors = {
   blockId: mkSimpleSelector(app => app.blockId),
   blockType: mkSimpleSelector(app => app.blockType),
   blockValue: mkSimpleSelector(app => app.blockValue),
+  studioView: mkSimpleSelector(app => app.studioView),
   learningContextId: mkSimpleSelector(app => app.learningContextId),
   editorInitialized: mkSimpleSelector(app => app.editorInitialized),
   saveResponse: mkSimpleSelector(app => app.saveResponse),
@@ -37,6 +38,18 @@ export const isInitialized = createSelector(
   ],
   (unitUrl, blockValue) => !!(unitUrl && blockValue),
 );
+
+export const isRaw = createSelector([module.simpleSelectors.studioView],
+  (studioView) => {
+    if (studioView === null) {
+      return null;
+    }
+    console.log(studioView.data.html);
+    if (studioView.data.html.includes('data-editor="raw"')) {
+      return true;
+    }
+    return false;
+  });
 
 export const displayTitle = createSelector(
   [
@@ -72,4 +85,5 @@ export default {
   returnUrl,
   displayTitle,
   analytics,
+  isRaw,
 };

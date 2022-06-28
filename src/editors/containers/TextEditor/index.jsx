@@ -37,6 +37,7 @@ import messages from './messages';
 export const TextEditor = ({
   onClose,
   // redux
+  isRaw,
   blockValue,
   lmsEndpointUrl,
   studioEndpointUrl,
@@ -51,6 +52,8 @@ export const TextEditor = ({
   const imageSelection = hooks.selectedImage(null);
 
   if (!refReady) { return null; }
+
+  console.log(`This is a Raw Editor: ${isRaw}`);
 
   return (
     <EditorContainer
@@ -124,6 +127,7 @@ export const mapStateToProps = (state) => ({
   studioEndpointUrl: selectors.app.studioEndpointUrl(state),
   blockFailed: selectors.requests.isFailed(state, { requestKey: RequestKeys.fetchBlock }),
   blockFinished: selectors.requests.isFinished(state, { requestKey: RequestKeys.fetchBlock }),
+  isRaw: selectors.app.isRaw(state),
 });
 
 export const mapDispatchToProps = {

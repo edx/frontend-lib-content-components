@@ -51,6 +51,23 @@ export const fetchBlock = ({ ...rest }) => (dispatch, getState) => {
 };
 
 /**
+ * Tracked fetchByBlockId api method.
+ * Tracked to the `fetchBlock` request key.
+ * @param {[func]} onSuccess - onSuccess method ((response) => { ... })
+ * @param {[func]} onFailure - onFailure method ((error) => { ... })
+ */
+export const fetchStudioView = ({ ...rest }) => (dispatch, getState) => {
+  dispatch(module.networkRequest({
+    requestKey: RequestKeys.fetchStudioView,
+    promise: api.fetchStudioView({
+      studioEndpointUrl: selectors.app.studioEndpointUrl(getState()),
+      blockId: selectors.app.blockId(getState()),
+    }),
+    ...rest,
+  }));
+};
+
+/**
  * Tracked fetchByUnitId api method.
  * Tracked to the `fetchUnit` request key.
  * @param {[func]} onSuccess - onSuccess method ((response) => { ... })
@@ -116,4 +133,5 @@ export default StrictDict({
   fetchUnit,
   fetchBlock,
   saveBlock,
+  fetchStudioView,
 });
